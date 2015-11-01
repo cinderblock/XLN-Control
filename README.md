@@ -1,30 +1,75 @@
-# electron-quick-start
+# jsXLN
 
-**Clone and run for a quick way to see an Electron in action.**
+This is a library and a GUI for interfacing with the XLN series programmable DC power supplies.
 
-This is a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start) within the Electron documentation.
+## Leftover README from boilerplates
 
-A basic Electron application needs just these files:
+This is a sample repository of [Electron](http://electron.atom.io/) application.
 
-- `index.html` - A web page to render.
-- `main.js` - Starts the app and creates a browser window to render HTML.
-- `package.json` - Points to the app's main file and lists its details and dependencies.
+This boilerplate includes the following build tasks:
 
-You can learn more about each of these components within the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start).
+* Transpillation [React](https://facebook.github.io/react/) JSX and ES6 style JavaScript files with [Babel](https://babeljs.io/)
+* Compilation scss files
+* Livereload when you change source files
+* Packaging distribution applications for each platforms(win32, darwin, linux)
 
-## To Use
+## Install
 
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+Clone this repository, so execute the following command.
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/atom/electron-quick-start
-# Go into the repository
-$ cd electron-quick-start
-# Install dependencies and run the app
-$ npm install && npm start
+cd jsXLN
+npm install -g bower gulp electron-prebuilt
+npm install
 ```
 
-Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
+## Run application
+### With file watch and livereload
 
-#### License [MIT](LICENSE.md)
+```bash
+gulp serve
+```
+
+### Pre-packaging app
+
+```bash
+gulp build;electron dist
+```
+
+## Package application
+
+```bash
+gulp package
+```
+
+## Copy this boilerplate
+
+```bash
+gulp boilerplate -o {DIST_DIR}
+```
+
+## Directory structure
+
+```
++ .serve/              Compiled files
++ dist/                Application for distribution
+- release/             Packaged applications for platforms
+ |+ darwin/
+ |+ linux/
+ |+ win32/
+- src/                 Source directory
+ |- assets/
+  |+ images/
+ |- browser/           For browser process scripts
+  |+ menu/
+ |- renderer/          For renderer process scripts and resources
+  |+ components/       React components
+  |  bootstrap.js      Entry point for render process
+  |  index.html
+ |- styles/            SCSS directory
+  |  main.scss
+ |  app.js             Entry point for browser process
+  bower.json
+  gulpfile.js
+  package.json
+```
