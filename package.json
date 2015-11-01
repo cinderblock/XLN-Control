@@ -1,7 +1,7 @@
 {
   "name": "jsXLN",
   "version": "0.0.1",
-  "description": "Libraries and a GUI for interfacing with XLN series programmable DC power suppplies",
+  "description": "Libraries and a GUI for interfacing with XLN series programmable DC power supplies",
   "main": ".serve/app.js",
   "scripts": {
     "install": "bower install",

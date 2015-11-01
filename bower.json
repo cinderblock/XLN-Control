@@ -1,7 +1,7 @@
 {
   "name": "jsXLN",
   "version": "0.0.1",
-  "description": "Libraries and a GUI for interfacing with XLN series programmable DC power suppplies",
+  "description": "Libraries and a GUI for interfacing with XLN series programmable DC power supplies",
   "authors": [
     "Cameron Tacklind <cameron@tacklind.com>"
   ],
