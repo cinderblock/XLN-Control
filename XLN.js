@@ -1,5 +1,7 @@
 'use strict';
 
+var dgram = require('dgram');
+
 const XLN_UDP_PORT = 9221;
 
 class XLN {
