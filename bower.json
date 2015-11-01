@@ -1,0 +1,19 @@
+{
+  "name": "jsXLN",
+  "version": "0.0.1",
+  "description": "Libraries and a GUI for interfacing with XLN series programmable DC power suppplies",
+  "authors": [
+    "Cameron Tacklind <cameron@tacklind.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.4"
+  }
+}
