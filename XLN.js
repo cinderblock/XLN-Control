@@ -5,7 +5,7 @@ var dgram = require('dgram');
 const XLN_UDP_PORT = 9221;
 
 class XLN {
-  contructor(options, callback) {
+  constructor(options, callback) {
 
     this.host = options.host;
     this.sock = dgram.createSocket('udp4');
