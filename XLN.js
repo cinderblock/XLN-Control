@@ -17,15 +17,23 @@ class XLN {
   }
 
   send(str, callback) {
-    this.sock.once('message', msg => callback(parseMessage(msg)));
+    this.sock.once('message', callback);
     this.buff.fill(0);
     this.buff.write(str);
     this.sock.send(this.buff, 0, this.buff.length, XLN_UDP_PORT, this.host);
   }
 
-  parseMessage(msg) {
-    return msg.toString();
+  readStatus(callback) {
+    this.send('MEAS:CURR?', (msg, rinfo) => callback(parseMessage(msg), rinfo));
   }
+}
+
+function parseMessage(msg) {
+  msg = msg.toString();
+
+
+
+  return msg;
 }
 
 module.exports = XLN;
