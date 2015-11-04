@@ -57,7 +57,7 @@ gulp.task('compile:scripts:watch', function (done) {
     .pipe($.watch('src/**/*.{js,jsx}', {verbose: true}))
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe($.babel({stage: 0}))
+    .pipe($.babel())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(serveDir))
   ;
@@ -67,7 +67,7 @@ gulp.task('compile:scripts:watch', function (done) {
 // Compile scripts for distribution
 gulp.task('compile:scripts', function () {
   return gulp.src('src/**/*.{js,jsx}')
-    .pipe($.babel({stage: 0}))
+    .pipe($.babel())
     .pipe($.uglify())
     .pipe(gulp.dest(distDir))
   ;
