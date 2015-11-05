@@ -11,8 +11,7 @@
     "type": "git",
     "url": "https://github.com/cinderblock/jsXLN.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Cameron Tacklind <cameron@tacklind.com>",
   "license": "MIT",
   "bugs": {
