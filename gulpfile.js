@@ -34,7 +34,12 @@ gulp.task('compile:styles', function () {
 // Inject *.css(compiled and depedent) files into *.html
 gulp.task('inject:css', ['compile:styles'], function() {
   return gulp.src(srcDir + '/**/*.html')
-    .pipe($.inject(gulp.src(mainBowerFiles().concat([serveDir + '/styles/**/*.css'])), {
+    .pipe($.inject(gulp.src(mainBowerFiles(), {read: false, base: __dirname+'/bower_components'}), {
+      name: 'bower',
+      relative: true,
+      addPrefix: '..'
+    }))
+    .pipe($.inject(gulp.src([serveDir + '/styles/**/*.css'], {read: false}), {
       relative: true,
       ignorePath: ['../../.serve', '..'],
       addPrefix: '..'
