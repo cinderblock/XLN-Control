@@ -1,27 +1,26 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "jsXLN",
+  "version": "0.0.1",
+  "description": "Libraries and a GUI for interfacing with XLN series programmable DC power supplies",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atom/electron-quick-start.git"
+    "url": "https://github.com/cinderblock/jsXLN.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "XLN",
+    "XLN6024",
+    "SCPI"
   ],
   "author": "GitHub",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/atom/electron-quick-start/issues"
+    "url": "https://github.com/cinderblock/jsXLN/issues"
   },
-  "homepage": "https://github.com/atom/electron-quick-start#readme",
+  "homepage": "https://github.com/cinderblock/jsXLN#readme",
   "devDependencies": {
     "electron-prebuilt": "^0.34.0"
   }
