@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import {tcpXLN} from 'xln';
+import {Button} from 'react-bootstrap';
 
 export default class XLN extends React.Component {
 
@@ -15,6 +16,7 @@ export default class XLN extends React.Component {
       measVoltage: null,
       measCurrent: null,
       output: null
+      outputSet: false
     }
     this.connection = null;
   }
@@ -54,6 +56,16 @@ export default class XLN extends React.Component {
     this.setState(state);
   }
 
+  toggleOutput() {
+
+    var nxt = !(this.state.outputSet);
+
+    this.connection.setOutput(nxt);
+
+    this.setState({outputSet: nxt});
+
+  }
+
   render() {
     return (
       <div>
@@ -62,7 +74,7 @@ export default class XLN extends React.Component {
         <div>{this.state.setCurrent}</div>
         <div>{this.state.measVoltage}</div>
         <div>{this.state.measCurrent}</div>
-        <div>{this.state.output}</div>
+        <div><Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button></div>
         <div>{this.state.messages}</div>
         <div>{this.state.connectedSince}</div>
       </div>
