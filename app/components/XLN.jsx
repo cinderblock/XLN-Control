@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import udpXLN from 'xln';
+import {tcpXLN} from 'xln';
 
 export default class XLN extends React.Component {
 
@@ -23,7 +23,36 @@ export default class XLN extends React.Component {
   //   host: null
   // }
 
+  componentWillMount() {
+    this.connection = new tcpXLN({host:this.props.host},null);
+    let probe = setInterval(() => {
 
+      this.connection.getMeasuredCurrent(current => {
+        this.connection.getMeasuredVoltage(voltage => {
+          this.connection.getOutputState(state => {
+            this.connection.getOutput(enabled => {
+              this.updateState({
+                measCurrent: current,
+                measVoltage: voltage,
+                output: enabled + ' (' + state + ')'
+              })
+            })
+          })
+        })
+      })
+
+
+    }, 200);
+
+    // this.connection.on('close', () => {
+    //   clearInterval(probe);
+    // })
+  }
+
+  updateState(state) {
+    state.messages = this.state.messages + 1;
+    this.setState(state);
+  }
 
   render() {
     return (
