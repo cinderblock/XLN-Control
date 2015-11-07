@@ -15,7 +15,7 @@ export default class XLN extends React.Component {
       setCurrent: null,
       measVoltage: null,
       measCurrent: null,
-      output: null
+      output: 'N/A',
       outputSet: false
     }
     this.connection = null;
