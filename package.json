@@ -1,5 +1,5 @@
 {
-  "name": "jsXLN",
+  "name": "XLN-Control",
   "version": "0.0.1",
   "description": "Libraries and a GUI for interfacing with XLN series programmable DC power supplies",
   "main": "main.js",
