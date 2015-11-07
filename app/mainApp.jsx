@@ -1,14 +1,11 @@
 import React from 'react';
-import AppContainer from './containers/AppContainer';
-import router from './routes/router';
+import ReactDOM from 'react-dom';
+import routes from './routes/routes';
+import {Router} from 'react-router';
 import debug from './utils/debug';
 import './app.css';
 
-var dd = debug('mainApp');
 
 window.location.hash = '/';
 
-router.run(Handler => {
-  dd('router.run', Handler);
-  React.render(<Handler />, document.getElementById('react-root'));
-});
+ReactDOM.render(<Router location={Router.HashLocation}>{routes}</Router>, document.getElementById('react-root'));
