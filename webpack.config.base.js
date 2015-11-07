@@ -2,15 +2,17 @@ var path = require('path');
 
 module.exports = {
   module: {
-    loaders: [{
+    loaders: [
+      {
       test: /\.jsx?$/,
       loader: 'babel',
       query: {
         presets: ['es2015','stage-0','react']
       },
       exclude: /node_modules/
-    }]
-  },
+    },
+    { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+  ]},
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
