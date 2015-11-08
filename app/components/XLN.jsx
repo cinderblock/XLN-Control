@@ -3,52 +3,81 @@ import { Link } from 'react-router';
 import {tcpXLN} from 'xln';
 import {Button} from 'react-bootstrap';
 
-export default class XLN extends React.Component {
+class XLN extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       // Number of messages seen since start of connection
       messages: 0,
-      connectedSince: false,
+      connected: false,
       setVoltage: null,
       setCurrent: null,
       measVoltage: null,
       measCurrent: null,
       output: 'N/A',
-      outputSet: false
+      outputSet: false,
+      connectionError: null,
+      connectionState: 'Initializing'
     }
     this.connection = null;
   }
 
-  // static defaultProps = {
-  //   host: null
-  // }
+ static propTypes = {
+    host: React.PropTypes.string.isRequired
+  }
 
   componentWillMount() {
-    this.connection = new tcpXLN({host:this.props.host},null);
-    let probe = setInterval(() => {
+    this.reconnect();
+  }
 
-      this.connection.getMeasuredCurrent(current => {
-        this.connection.getMeasuredVoltage(voltage => {
-          this.connection.getOutputState(state => {
-            this.connection.getOutput(enabled => {
-              this.updateState({
-                measCurrent: current,
-                measVoltage: voltage,
-                output: enabled + ' (' + state + ')'
+  componentWillUnmount() {
+    this.connection.end();
+  }
+
+  reconnect() {
+    this.setState({connectionState: 'Connecting'});
+
+    this.connection = new tcpXLN({host:this.props.host}, () => {
+
+      this.setState({connected: true});
+
+      let probe;
+      let self = this;
+
+      function getData() {
+        probe = setTimeout(() => {
+
+          self.connection.getMeasuredCurrent(current => {
+            self.connection.getMeasuredVoltage(voltage => {
+              self.connection.getOutputState(state => {
+                self.connection.getOutput(enabled => {
+                  self.updateState({
+                    measCurrent: current,
+                    measVoltage: voltage,
+                    output: enabled + ' (' + state + ')'
+                  })
+                  getData();
+                })
               })
             })
           })
-        })
-      })
+        }, 10);
+      }
 
+      this.connection.on('close', () => {
+        clearTimeout(probe);
+        this.setState({connected: false});
+        this.setState({connectionState: 'Disconnected'});
+      });
 
-    }, 200);
+      getData();
+    });
 
-    // this.connection.on('close', () => {
-    //   clearInterval(probe);
-    // })
+    this.connection.on('error', err => {
+      this.setState({connectionState: 'Error'});
+      this.setState({connectionError: err.toString()});
+    });
   }
 
   updateState(state) {
@@ -67,6 +96,14 @@ export default class XLN extends React.Component {
   }
 
   render() {
+    if (!this.state.connected) {
+      return (
+        <div>
+         <div>{this.state.connectionState}</div>
+         <div>{this.state.connectionError}</div>
+        </div>
+      );
+    }
     return (
       <div>
         <div>{this.props.host || 'No host specified'}</div>
@@ -76,9 +113,11 @@ export default class XLN extends React.Component {
         <div>{this.state.measCurrent}</div>
         <div><Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button></div>
         <div>{this.state.messages}</div>
-        <div>{this.state.connectedSince}</div>
+        <div>{this.state.connected}</div>
       </div>
     );
   }
 
 }
+
+export default XLN;
