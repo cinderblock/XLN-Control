@@ -15,6 +15,10 @@ class XLN extends React.Component {
       setCurrent: null,
       measVoltage: null,
       measCurrent: null,
+      outVoltage: null,
+      outCurrent: null,
+      limitVoltage: null,
+      limitCurrent: null,
       output: 'N/A',
       outputSet: false,
       connectionError: null,
@@ -22,6 +26,7 @@ class XLN extends React.Component {
     }
     this.connection = null;
     this.updateNumber = 0;
+    this.nextUpdate = false;
   }
 
  static propTypes = {
@@ -48,7 +53,9 @@ class XLN extends React.Component {
         this.setState({connectionState: 'Disconnected'});
       });
 
-      this.update();
+      this.updateSourceCurrent(() => {
+        this.updateSourceVoltage(this.update.bind(this));
+      });
     });
 
     this.connection.on('error', err => {
@@ -60,6 +67,8 @@ class XLN extends React.Component {
   /** handle the next check */
   update() {
     if (!this.state.connected) return;
+
+    if (this.nextUpdate) return this.nextUpdate.bind(this)();
 
     if (this.updateNumber == 0) this.updateMeasuredCurrent(this.update.bind(this));
     else if (this.updateNumber == 1) this.updateMeasuredVoltage(this.update.bind(this));
@@ -88,6 +97,34 @@ class XLN extends React.Component {
     });
   }
 
+  updateSourceCurrent(cb) {
+    this.connection.getSourceCurrent(current => {
+      this.updateState({outCurrent: current})
+      cb();
+    });
+  }
+
+  updateSourceVoltage(cb) {
+    this.connection.getSourceVoltage(voltage => {
+      this.updateState({outVoltage: voltage})
+      cb();
+    });
+  }
+
+  updateOutputCurrentLimit(cb) {
+    this.connection.getOutputCurrentLimit(current => {
+      this.updateState({limitCurrent: current})
+      cb();
+    });
+  }
+
+  updateOutputVoltageLimit(cb) {
+    this.connection.getOutputVoltageLimit(voltage => {
+      this.updateState({limitVoltage: voltage})
+      cb();
+    });
+  }
+
   updateState(state) {
     state.messages = this.state.messages + 1;
     this.setState(state);
@@ -101,6 +138,22 @@ class XLN extends React.Component {
 
     this.setState({outputSet: nxt});
 
+  }
+
+  setSourceVoltage(voltage) {
+    this.connection.setSourceVoltage(voltage);
+  }
+
+  setSourceCurrent(current) {
+    this.connection.setSourceCurrent(current);
+  }
+
+  setOutputVoltageLimit(voltage) {
+    this.connection.setOutputVoltageLimit(voltage);
+  }
+
+  setOutputCurrentLimit(current) {
+    this.connection.setOutputCurrentLimit(current);
   }
 
   render() {
@@ -119,6 +172,8 @@ class XLN extends React.Component {
         <div>{this.state.setCurrent}</div>
         <div>{this.state.measVoltage}</div>
         <div>{this.state.measCurrent}</div>
+        <div>{this.state.outVoltage}</div>
+        <div>{this.state.outCurrent}</div>
         <div><Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button></div>
         <div>{this.state.messages}</div>
         <div>{this.state.connected}</div>
