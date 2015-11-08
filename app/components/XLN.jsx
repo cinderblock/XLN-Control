@@ -21,6 +21,7 @@ class XLN extends React.Component {
       connectionState: 'Initializing'
     }
     this.connection = null;
+    this.updateNumber = 0;
   }
 
  static propTypes = {
@@ -42,41 +43,48 @@ class XLN extends React.Component {
 
       this.setState({connected: true});
 
-      let probe;
-      let self = this;
-
-      function getData() {
-        probe = setTimeout(() => {
-
-          self.connection.getMeasuredCurrent(current => {
-            self.connection.getMeasuredVoltage(voltage => {
-              self.connection.getOutputState(state => {
-                self.connection.getOutput(enabled => {
-                  self.updateState({
-                    measCurrent: current,
-                    measVoltage: voltage,
-                    output: enabled + ' (' + state + ')'
-                  })
-                  getData();
-                })
-              })
-            })
-          })
-        }, 10);
-      }
-
       this.connection.on('close', () => {
-        clearTimeout(probe);
         this.setState({connected: false});
         this.setState({connectionState: 'Disconnected'});
       });
 
-      getData();
+      this.update();
     });
 
     this.connection.on('error', err => {
       this.setState({connectionState: 'Error'});
       this.setState({connectionError: err.toString()});
+    });
+  }
+
+  /** handle the next check */
+  update() {
+    if (!this.state.connected) return;
+
+    if (this.updateNumber == 0) this.updateMeasuredCurrent(this.update.bind(this));
+    else if (this.updateNumber == 1) this.updateMeasuredVoltage(this.update.bind(this));
+    else if (this.updateNumber == 2) this.updateOutputState(this.update.bind(this));
+    if (++this.updateNumber >= 3) this.updateNumber = 0;
+  }
+
+  updateMeasuredCurrent(cb) {
+    this.connection.getMeasuredCurrent(current => {
+      this.updateState({measCurrent: current})
+      cb();
+    });
+  }
+
+  updateMeasuredVoltage(cb) {
+    this.connection.getMeasuredVoltage(voltage => {
+      this.updateState({measVoltage: voltage})
+      cb();
+    });
+  }
+
+  updateOutputState(cb) {
+    this.connection.getOutputState(state => {
+      this.updateState({output: state})
+      cb();
     });
   }
 
