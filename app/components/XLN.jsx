@@ -44,10 +44,10 @@ class XLN extends React.Component {
     this.chart = chart;
 
     this.voltageTimeSeries = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 255, 0, 1)', lineWidth: 2});
-    this.currentTimeSeries = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 2});
+    this.currentTimeSeries = chart.addTimeSeries(null, {strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 2});
     this.vLimitTimeSeries  = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 255, 0, 0)', fillStyle: 'rgba(0, 255, 0, 0.5)', lineWidth: 0});
-    this.cLimitTimeSeries  = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 0, 255, 0)', fillStyle: 'rgba(0, 0, 255, 0.5)', lineWidth: 0});
-    this.powerTimeSeries   = chart.addTimeSeries(null, {strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 2});
+    this.cLimitTimeSeries  = chart.addTimeSeries(null, {strokeStyle: 'rgba(255, 0, 0, 0)', fillStyle: 'rgba(0, 0, 255, 0.5)', lineWidth: 0});
+    this.powerTimeSeries   = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 2});
   }
 
   componentWillUnmount() {
