@@ -11,7 +11,6 @@ export default class MainPageContainer extends React.Component {
   render() {
     return (
       <div>
-        <h2>XLN6024 Control</h2>
         <XLN host="192.168.1.167" />
       </div>
     );
