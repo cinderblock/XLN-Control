@@ -112,12 +112,11 @@ class XLN extends React.Component {
   updateOutputState(cb) {
     var time = new Date().getTime();
     this.connection.getOutputState(state => {
-      state = state.replace(/\0/g, '');
       this.updateState({output: state});
-      if (state.trim() == 'CV') {
+      if (state == 'CV') {
         this.vLimitTimeSeries.append(time, this.state.measVoltage);
         this.cLimitTimeSeries.append(time, 0);
-      } else if (state.trim() == 'CC') {
+      } else if (state == 'CC') {
         this.vLimitTimeSeries.append(time, 0);
         this.cLimitTimeSeries.append(time, this.state.measCurrent);
       } else {

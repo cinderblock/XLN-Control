@@ -72,7 +72,7 @@
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.4.1",
     "webpack-target-electron-renderer": "^0.1.1",
-    "xln": "0.4.0"
+    "xln": "0.6.1"
   },
   "dependencies": {
     "debug": "^2.2.0",
