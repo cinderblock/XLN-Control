@@ -204,7 +204,7 @@ class XLN extends React.Component {
         <div><Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button></div>
         <div>{this.state.messages}</div>
         <div>{this.state.connected}</div>
-        <Smoothie ref={this.setupTimeSeries.bind(this)} />
+        <Smoothie ref={this.setupTimeSeries.bind(this)} interpolation="step" />
       </div>
     );
   }
