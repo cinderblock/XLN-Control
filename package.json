@@ -81,6 +81,7 @@
     "keymirror": "^0.1.1",
     "object-assign": "^4.0.1",
     "react": "^0.14.2",
-    "react-router": "^1.0.0-rc4"
+    "react-router": "^1.0.0-rc4",
+    "react-smoothie": "0.0.4"
   }
 }

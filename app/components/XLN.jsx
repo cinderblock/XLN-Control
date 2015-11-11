@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import {tcpXLN} from 'xln';
 import {Button} from 'react-bootstrap';
+import Smoothie from 'react-smoothie';
 
 class XLN extends React.Component {
 
@@ -35,6 +36,18 @@ class XLN extends React.Component {
 
   componentDidMount() {
     this.reconnect();
+  }
+
+  setupTimeSeries(chart) {
+    if (!chart || this.chart === chart) return;
+
+    this.chart = chart;
+
+    this.voltageTimeSeries = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 255, 0, 1)', lineWidth: 2});
+    this.currentTimeSeries = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 2});
+    this.vLimitTimeSeries  = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 255, 0, 0)', fillStyle: 'rgba(0, 255, 0, 0.5)', lineWidth: 0});
+    this.cLimitTimeSeries  = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 0, 255, 0)', fillStyle: 'rgba(0, 0, 255, 0.5)', lineWidth: 0});
+    this.powerTimeSeries   = chart.addTimeSeries(null, {strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 2});
   }
 
   componentWillUnmount() {
@@ -77,22 +90,41 @@ class XLN extends React.Component {
   }
 
   updateMeasuredCurrent(cb) {
+    var time = new Date().getTime();
     this.connection.getMeasuredCurrent(current => {
       this.updateState({measCurrent: current});
+      this.currentTimeSeries.append(time, current);
+      this.powerTimeSeries.append(time, current * this.state.measVoltage);
       cb();
     });
   }
 
   updateMeasuredVoltage(cb) {
+    var time = new Date().getTime();
     this.connection.getMeasuredVoltage(voltage => {
       this.updateState({measVoltage: voltage});
+      this.voltageTimeSeries.append(time, voltage);
+      this.powerTimeSeries.append(time, voltage * this.state.measCurrent);
       cb();
     });
   }
 
   updateOutputState(cb) {
+    var time = new Date().getTime();
     this.connection.getOutputState(state => {
+      state = state.replace(/\0/g, '');
       this.updateState({output: state});
+      if (state.trim() == 'CV') {
+        this.vLimitTimeSeries.append(time, this.state.measVoltage);
+        this.cLimitTimeSeries.append(time, 0);
+      } else if (state.trim() == 'CC') {
+        this.vLimitTimeSeries.append(time, 0);
+        this.cLimitTimeSeries.append(time, this.state.measCurrent);
+      } else {
+        var max = Math.max(this.state.measCurrent, this.state.measVoltage);
+        this.vLimitTimeSeries.append(time, max);
+        this.cLimitTimeSeries.append(time, max);
+      }
       cb();
     });
   }
@@ -173,6 +205,7 @@ class XLN extends React.Component {
         <div><Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button></div>
         <div>{this.state.messages}</div>
         <div>{this.state.connected}</div>
+        <Smoothie ref={this.setupTimeSeries.bind(this)} />
       </div>
     );
   }
