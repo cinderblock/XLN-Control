@@ -78,49 +78,49 @@ class XLN extends React.Component {
 
   updateMeasuredCurrent(cb) {
     this.connection.getMeasuredCurrent(current => {
-      this.updateState({measCurrent: current})
+      this.updateState({measCurrent: current});
       cb();
     });
   }
 
   updateMeasuredVoltage(cb) {
     this.connection.getMeasuredVoltage(voltage => {
-      this.updateState({measVoltage: voltage})
+      this.updateState({measVoltage: voltage});
       cb();
     });
   }
 
   updateOutputState(cb) {
     this.connection.getOutputState(state => {
-      this.updateState({output: state})
+      this.updateState({output: state});
       cb();
     });
   }
 
   updateSourceCurrent(cb) {
     this.connection.getSourceCurrent(current => {
-      this.updateState({outCurrent: current})
+      this.updateState({outCurrent: current});
       cb();
     });
   }
 
   updateSourceVoltage(cb) {
     this.connection.getSourceVoltage(voltage => {
-      this.updateState({outVoltage: voltage})
+      this.updateState({outVoltage: voltage});
       cb();
     });
   }
 
   updateOutputCurrentLimit(cb) {
     this.connection.getOutputCurrentLimit(current => {
-      this.updateState({limitCurrent: current})
+      this.updateState({limitCurrent: current});
       cb();
     });
   }
 
   updateOutputVoltageLimit(cb) {
     this.connection.getOutputVoltageLimit(voltage => {
-      this.updateState({limitVoltage: voltage})
+      this.updateState({limitVoltage: voltage});
       cb();
     });
   }
