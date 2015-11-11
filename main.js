@@ -18,7 +18,7 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   mainWindow = new BrowserWindow({ width: 1024, height: 728 });
 
-  if (process.env.HOT) {
+  if (process.env.HOT || process.env.npm_config_hot) {
     mainWindow.loadUrl('file://' + __dirname + '/app/hot-dev-app.html');
   } else {
     mainWindow.loadUrl('file://' + __dirname + '/app/app.html');
