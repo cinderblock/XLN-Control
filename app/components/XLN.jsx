@@ -33,7 +33,7 @@ class XLN extends React.Component {
     host: React.PropTypes.string.isRequired
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.reconnect();
   }
 
