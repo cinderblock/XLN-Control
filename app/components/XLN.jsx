@@ -131,13 +131,9 @@ class XLN extends React.Component {
   }
 
   toggleOutput() {
-
     var nxt = !(this.state.outputSet);
-
     this.connection.setOutput(nxt);
-
     this.setState({outputSet: nxt});
-
   }
 
   setSourceVoltage(voltage) {
