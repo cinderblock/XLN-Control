@@ -38,15 +38,29 @@ class XLN extends React.Component {
     this.reconnect();
   }
 
-  setupTimeSeries(chart) {
-    if (!chart || this.chart === chart) return;
+  setupVoltageChart(chart) {
+    if (!chart || this.voltageChart === chart) return;
 
-    this.chart = chart;
+    this.voltageChart = chart;
 
     this.voltageTimeSeries = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 255, 0, 1)', lineWidth: 2});
-    this.currentTimeSeries = chart.addTimeSeries(null, {strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 2});
     this.vLimitTimeSeries  = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 255, 0, 0)', fillStyle: 'rgba(0, 255, 0, 0.5)', lineWidth: 0});
+  }
+
+  setupCurrentChart(chart) {
+    if (!chart || this.currentChart === chart) return;
+
+    this.currentChart = chart;
+
+    this.currentTimeSeries = chart.addTimeSeries(null, {strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 2});
     this.cLimitTimeSeries  = chart.addTimeSeries(null, {strokeStyle: 'rgba(255, 0, 0, 0)', fillStyle: 'rgba(0, 0, 255, 0.5)', lineWidth: 0});
+  }
+
+  setupPowerChart(chart) {
+    if (!chart || this.powerChart === chart) return;
+
+    this.powerChart = chart;
+
     this.powerTimeSeries   = chart.addTimeSeries(null, {strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 2});
   }
 
@@ -204,7 +218,9 @@ class XLN extends React.Component {
         <div><Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button></div>
         <div>{this.state.messages}</div>
         <div>{this.state.connected}</div>
-        <Smoothie ref={this.setupTimeSeries.bind(this)} interpolation="step" width="1000" height="300" />
+        <Smoothie ref={this.setupVoltageChart.bind(this)} interpolation="step" width="1000" height="300" />
+        <Smoothie ref={this.setupCurrentChart.bind(this)} interpolation="step" width="1000" height="300" />
+        <Smoothie ref={this.setupPowerChart.bind(this)} interpolation="step" width="1000" height="300" />
       </div>
     );
   }
