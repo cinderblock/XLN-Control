@@ -3,6 +3,43 @@ import { Link } from 'react-router';
 import {tcpXLN} from 'xln';
 import {Button} from 'react-bootstrap';
 import Smoothie from 'react-smoothie';
+import FA from 'react-fontawesome';
+
+class LayoutHelper extends React.Component {
+  render() {
+
+    var controlSize = '300px';
+
+    var wrapperStyle = {
+      marginRight: controlSize,
+      width: '1000px',
+    };
+
+    var chartStyle = {
+      float: 'left',
+      width: '1000px',
+    };
+
+    var controlStyle = {
+      float: 'right',
+      width: controlSize,
+      marginRight: '-' + controlSize,
+    };
+
+    var clear = {
+      clear: 'both',
+    }
+
+    return (
+      <div style={wrapperStyle}>
+        <div style={chartStyle}><Smoothie ref={this.props.chartCallback.bind(this)} interpolation="step" width="1000" height="300" /></div>
+        <div style={controlStyle}>{this.props.children}</div>
+        <div style={clear}></div>
+      </div>
+    );
+  }
+
+}
 
 class XLN extends React.Component {
 
@@ -206,21 +243,34 @@ class XLN extends React.Component {
         </div>
       );
     }
+    if (!this.props.host) {
+      return <div>'No host specified'</div>;
+    }
+
     return (
       <div>
-        <div>{this.props.host || 'No host specified'}</div>
-        <div>{this.state.setVoltage}</div>
-        <div>{this.state.setCurrent}</div>
-        <div>{this.state.measVoltage}</div>
-        <div>{this.state.measCurrent}</div>
-        <div>{this.state.outVoltage}</div>
-        <div>{this.state.outCurrent}</div>
-        <div><Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button></div>
-        <div>{this.state.messages}</div>
-        <div>{this.state.connected}</div>
-        <Smoothie ref={this.setupVoltageChart.bind(this)} interpolation="step" width="1000" height="300" />
-        <Smoothie ref={this.setupCurrentChart.bind(this)} interpolation="step" width="1000" height="300" />
-        <Smoothie ref={this.setupPowerChart.bind(this)} interpolation="step" width="1000" height="300" />
+        <div>
+          <div><FA name='rocket' />{this.props.host}</div>
+          <div>{this.state.connected}</div>
+          <div>{this.state.messages}</div>
+        </div>
+        <LayoutHelper chartCallback={this.setupVoltageChart}>
+          <div>{this.state.setVoltage}</div>
+          <div>{this.state.measVoltage}</div>
+          <form onSubmit={e => {e.preventDefault(); setSourceVoltage(e.target[0].value);}}>
+            <input defaultValue={this.state.outVoltage} />
+          </form>
+        </LayoutHelper>
+        <LayoutHelper chartCallback={this.setupCurrentChart}>
+          <div>{this.state.setCurrent}</div>
+          <div>{this.state.measCurrent}</div>
+          <form onSubmit={e => {e.preventDefault(); setSourceCurrent(e.target[0].value);}}>
+            <input defaultValue={this.state.outCurrent} />
+          </form>
+        </LayoutHelper>
+        <LayoutHelper chartCallback={this.setupPowerChart}>
+          <Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button>
+        </LayoutHelper>
       </div>
     );
   }
