@@ -273,7 +273,7 @@ class XLN extends React.Component {
         </ChartLayout>
         <ChartLayout chartCallback={this.setupPowerChart.bind(this)}>
           <Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button>
-          <div>{this.state.measVoltage * this.state.measCurrent}</div>
+          <div>{(this.state.measVoltage * this.state.measCurrent).toFixed(3)}</div>
         </ChartLayout>
       </div>
     );
