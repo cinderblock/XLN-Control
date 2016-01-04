@@ -9,15 +9,17 @@ class ChartLayout extends React.Component {
   render() {
 
     var controlSize = 300;
+    var chartWidth = 1000;
+    var chartHeight = 300;
 
     var wrapperStyle = {
       marginRight: controlSize,
-      width: '1000px',
+      width: chartWidth,
     };
 
     var chartStyle = {
       float: 'left',
-      width: '1000px',
+      width: chartWidth,
     };
 
     var controlStyle = {
@@ -32,7 +34,7 @@ class ChartLayout extends React.Component {
 
     return (
       <div style={wrapperStyle}>
-        <div style={chartStyle}><Smoothie ref={this.props.chartCallback.bind(this)} interpolation="step" width="1000" height="300" /></div>
+        <div style={chartStyle}><Smoothie ref={this.props.chartCallback.bind(this)} interpolation="step" width={chartWidth} height={chartHeight} /></div>
         <div style={controlStyle}>{this.props.children}</div>
         <div style={clear}></div>
       </div>
