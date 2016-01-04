@@ -250,9 +250,10 @@ class XLN extends React.Component {
     return (
       <div>
         <div>
-          <div><FA name='rocket' />{this.props.host}</div>
+          <div style={{float: 'right'}}><FA name='spinner' style={messagesSpin(this.state.messages)} /></div>
+          <div>{this.props.host}</div>
           <div>{this.state.connected}</div>
-          <div>{this.state.messages}</div>
+          <div style={{clear: 'both'}}></div>
         </div>
         <ChartLayout chartCallback={this.setupVoltageChart}>
           <div>{this.state.setVoltage}</div>
@@ -275,6 +276,18 @@ class XLN extends React.Component {
     );
   }
 
+}
+
+function messagesSpin(val) {
+  val *= 4;
+  val %= 360;
+  return {
+    // IE 9
+    msTransform: 'rotate(' + val + 'deg)',
+    // Chrome, Safari, Opera
+    WebkitTransform: 'rotate(' + val + 'deg)',
+    transform: 'rotate(' + val + 'deg)',
+  }
 }
 
 export default XLN;
