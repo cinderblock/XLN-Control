@@ -34,7 +34,7 @@ class ChartLayout extends React.Component {
 
     return (
       <div style={wrapperStyle}>
-        <div style={chartStyle}><Smoothie ref={this.props.chartCallback.bind(this)} interpolation="step" width={chartWidth} height={chartHeight} /></div>
+        <div style={chartStyle}><Smoothie ref={this.props.chartCallback} interpolation="step" width={chartWidth} height={chartHeight} /></div>
         <div style={controlStyle}>{this.props.children}</div>
         <div style={clear}></div>
       </div>
@@ -257,21 +257,21 @@ class XLN extends React.Component {
           <div>{this.state.connected}</div>
           <div style={{clear: 'both'}}></div>
         </div>
-        <ChartLayout chartCallback={this.setupVoltageChart}>
+        <ChartLayout chartCallback={this.setupVoltageChart.bind(this)}>
           <div>{this.state.setVoltage}</div>
           <div>{this.state.measVoltage}</div>
           <form onSubmit={e => {e.preventDefault(); setSourceVoltage(e.target[0].value);}}>
             <input defaultValue={this.state.outVoltage} />
           </form>
         </ChartLayout>
-        <ChartLayout chartCallback={this.setupCurrentChart}>
+        <ChartLayout chartCallback={this.setupCurrentChart.bind(this)}>
           <div>{this.state.setCurrent}</div>
           <div>{this.state.measCurrent}</div>
           <form onSubmit={e => {e.preventDefault(); setSourceCurrent(e.target[0].value);}}>
             <input defaultValue={this.state.outCurrent} />
           </form>
         </ChartLayout>
-        <ChartLayout chartCallback={this.setupPowerChart}>
+        <ChartLayout chartCallback={this.setupPowerChart.bind(this)}>
           <Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button>
           <div>{this.state.measVoltage * this.state.measCurrent}</div>
         </ChartLayout>
