@@ -8,7 +8,7 @@ import FA from 'react-fontawesome';
 class ChartLayout extends React.Component {
   render() {
 
-    var controlSize = '300px';
+    var controlSize = 300;
 
     var wrapperStyle = {
       marginRight: controlSize,
@@ -23,7 +23,7 @@ class ChartLayout extends React.Component {
     var controlStyle = {
       float: 'right',
       width: controlSize,
-      marginRight: '-' + controlSize,
+      marginRight: -controlSize,
     };
 
     var clear = {
