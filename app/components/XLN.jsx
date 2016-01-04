@@ -145,7 +145,7 @@ class XLN extends React.Component {
   updateMeasuredCurrent(cb) {
     var time = new Date().getTime();
     this.connection.getMeasuredCurrent(current => {
-      this.updateState({measCurrent: current});
+      this.updateStateIncrementMessages({measCurrent: current});
       this.currentTimeSeries.append(time, current);
       this.powerTimeSeries.append(time, current * this.state.measVoltage);
       cb();
@@ -155,7 +155,7 @@ class XLN extends React.Component {
   updateMeasuredVoltage(cb) {
     var time = new Date().getTime();
     this.connection.getMeasuredVoltage(voltage => {
-      this.updateState({measVoltage: voltage});
+      this.updateStateIncrementMessages({measVoltage: voltage});
       this.voltageTimeSeries.append(time, voltage);
       this.powerTimeSeries.append(time, voltage * this.state.measCurrent);
       cb();
@@ -165,7 +165,7 @@ class XLN extends React.Component {
   updateOutputState(cb) {
     var time = new Date().getTime();
     this.connection.getOutputState(state => {
-      this.updateState({output: state});
+      this.updateStateIncrementMessages({output: state});
       if (state == 'CV') {
         this.vLimitTimeSeries.append(time, this.state.measVoltage);
         this.cLimitTimeSeries.append(time, 0);
@@ -183,33 +183,33 @@ class XLN extends React.Component {
 
   updateSourceCurrent(cb) {
     this.connection.getSourceCurrent(current => {
-      this.updateState({outCurrent: current});
+      this.updateStateIncrementMessages({outCurrent: current});
       cb();
     });
   }
 
   updateSourceVoltage(cb) {
     this.connection.getSourceVoltage(voltage => {
-      this.updateState({outVoltage: voltage});
+      this.updateStateIncrementMessages({outVoltage: voltage});
       cb();
     });
   }
 
   updateOutputCurrentLimit(cb) {
     this.connection.getOutputCurrentLimit(current => {
-      this.updateState({limitCurrent: current});
+      this.updateStateIncrementMessages({limitCurrent: current});
       cb();
     });
   }
 
   updateOutputVoltageLimit(cb) {
     this.connection.getOutputVoltageLimit(voltage => {
-      this.updateState({limitVoltage: voltage});
+      this.updateStateIncrementMessages({limitVoltage: voltage});
       cb();
     });
   }
 
-  updateState(state) {
+  updateStateIncrementMessages(state) {
     state.messages = this.state.messages + 1;
     this.setState(state);
   }
