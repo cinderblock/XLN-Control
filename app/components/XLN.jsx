@@ -5,7 +5,7 @@ import {Button} from 'react-bootstrap';
 import Smoothie from 'react-smoothie';
 import FA from 'react-fontawesome';
 
-class LayoutHelper extends React.Component {
+class ChartLayout extends React.Component {
   render() {
 
     var controlSize = '300px';
@@ -254,23 +254,23 @@ class XLN extends React.Component {
           <div>{this.state.connected}</div>
           <div>{this.state.messages}</div>
         </div>
-        <LayoutHelper chartCallback={this.setupVoltageChart}>
+        <ChartLayout chartCallback={this.setupVoltageChart}>
           <div>{this.state.setVoltage}</div>
           <div>{this.state.measVoltage}</div>
           <form onSubmit={e => {e.preventDefault(); setSourceVoltage(e.target[0].value);}}>
             <input defaultValue={this.state.outVoltage} />
           </form>
-        </LayoutHelper>
-        <LayoutHelper chartCallback={this.setupCurrentChart}>
+        </ChartLayout>
+        <ChartLayout chartCallback={this.setupCurrentChart}>
           <div>{this.state.setCurrent}</div>
           <div>{this.state.measCurrent}</div>
           <form onSubmit={e => {e.preventDefault(); setSourceCurrent(e.target[0].value);}}>
             <input defaultValue={this.state.outCurrent} />
           </form>
-        </LayoutHelper>
-        <LayoutHelper chartCallback={this.setupPowerChart}>
+        </ChartLayout>
+        <ChartLayout chartCallback={this.setupPowerChart}>
           <Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)}>{this.state.output}</Button>
-        </LayoutHelper>
+        </ChartLayout>
       </div>
     );
   }
