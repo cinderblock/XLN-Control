@@ -260,14 +260,14 @@ class XLN extends React.Component {
         <ChartLayout chartCallback={this.setupVoltageChart.bind(this)}>
           <div>{this.state.setVoltage}</div>
           <div>{this.state.measVoltage}</div>
-          <form onSubmit={e => {e.preventDefault(); setSourceVoltage(e.target[0].value);}}>
+          <form onSubmit={e => {e.preventDefault(); this.setSourceVoltage(e.target[0].value);}}>
             <input defaultValue={this.state.outVoltage} />
           </form>
         </ChartLayout>
         <ChartLayout chartCallback={this.setupCurrentChart.bind(this)}>
           <div>{this.state.setCurrent}</div>
           <div>{this.state.measCurrent}</div>
-          <form onSubmit={e => {e.preventDefault(); setSourceCurrent(e.target[0].value);}}>
+          <form onSubmit={e => {e.preventDefault(); this.setSourceCurrent(e.target[0].value);}}>
             <input defaultValue={this.state.outCurrent} />
           </form>
         </ChartLayout>
