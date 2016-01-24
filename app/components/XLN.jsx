@@ -258,6 +258,7 @@ class XLN extends React.Component {
           <div style={{clear: 'both'}}></div>
         </div>
         <ChartLayout chartCallback={this.setupVoltageChart.bind(this)}>
+          <h3>Voltage</h3>
           <div>{this.state.setVoltage} Volts</div>
           <div>{this.state.measVoltage} Volts</div>
           <form onSubmit={e => {e.preventDefault(); this.setSourceVoltage(e.target[0].value);}}>
@@ -265,6 +266,7 @@ class XLN extends React.Component {
           </form>
         </ChartLayout>
         <ChartLayout chartCallback={this.setupCurrentChart.bind(this)}>
+          <h3>Current</h3>
           <div>{this.state.setCurrent} Amps</div>
           <div>{this.state.measCurrent} Amps</div>
           <form onSubmit={e => {e.preventDefault(); this.setSourceCurrent(e.target[0].value);}}>
@@ -272,7 +274,9 @@ class XLN extends React.Component {
           </form>
         </ChartLayout>
         <ChartLayout chartCallback={this.setupPowerChart.bind(this)}>
+          <h3>Power</h3>
           <div>{(this.state.measVoltage * this.state.measCurrent).toFixed(3)} Watts</div>
+          <h3>Output Control</h3>
           <Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)} width="100%">{this.state.output}</Button>
         </ChartLayout>
       </div>
