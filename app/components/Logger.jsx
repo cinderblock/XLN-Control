@@ -7,6 +7,7 @@ export default class Logger extends React.Component {
     this.state = {
       currentFile: false,
       selectedFolder: false,
+      messages: 0,
     }
   }
 
@@ -54,6 +55,8 @@ export default class Logger extends React.Component {
   }
 
   append(data) {
+    this.setState({messages: this.state.messages + 1});
+
     if (!this.openFile)
       return;
 
