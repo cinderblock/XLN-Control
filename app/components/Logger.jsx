@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
+import ActivitySpinner from './ActivitySpinner.jsx';
 
 export default class Logger extends React.Component {
   constructor(props) {
@@ -7,7 +8,6 @@ export default class Logger extends React.Component {
     this.state = {
       currentFile: false,
       selectedFolder: false,
-      messages: 0,
     }
   }
 
@@ -55,7 +55,7 @@ export default class Logger extends React.Component {
   }
 
   append(data) {
-    this.setState({messages: this.state.messages + 1});
+    this.refs.loggerActivity.ping();
 
     if (!this.openFile)
       return;
@@ -74,7 +74,7 @@ export default class Logger extends React.Component {
 
     var loggingState = null;
     if (this.state.currentFile) {
-      loggingState = 'Logging to file:' + this.state.currentFile;
+      loggingState = 'Logging to file:' + this.state.currentFile + <ActivitySpinner ref='loggerActivity'/>;
     } else {
       loggingState = 'Not logging';
     }
