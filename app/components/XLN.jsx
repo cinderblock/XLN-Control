@@ -71,7 +71,7 @@ class XLN extends React.Component {
 
  static propTypes = {
     host: React.PropTypes.string.isRequired
-  }
+  };
 
   componentDidMount() {
     this.reconnect();
