@@ -5,6 +5,7 @@ import {Button} from 'react-bootstrap';
 import Smoothie from 'react-smoothie';
 import FA from 'react-fontawesome';
 import Logger from './Logger';
+import ActivitySpinner from './ActivitySpinner.jsx';
 
 class ChartLayout extends React.Component {
   render() {
@@ -215,7 +216,7 @@ class XLN extends React.Component {
   }
 
   updateStateIncrementMessages(state) {
-    state.messages = this.state.messages + 1;
+    this.refs.connectionActivity.ping();
     this.setState(state);
   }
 
@@ -257,7 +258,7 @@ class XLN extends React.Component {
     return (
       <div>
         <div>
-          <div style={{float: 'right'}}><FA name='spinner' style={messagesSpin(this.state.messages)} /></div>
+          <div style={{float: 'right'}}><ActivitySpinner ref='connectionActivity'/></div>
           <div>{this.props.host}</div>
           <div>{this.state.connected}</div>
           <div style={{clear: 'both'}}></div>
@@ -290,18 +291,6 @@ class XLN extends React.Component {
     );
   }
 
-}
-
-function messagesSpin(val) {
-  val *= 4;
-  val %= 360;
-  return {
-    // IE 9
-    msTransform: 'rotate(' + val + 'deg)',
-    // Chrome, Safari, Opera
-    WebkitTransform: 'rotate(' + val + 'deg)',
-    transform: 'rotate(' + val + 'deg)',
-  }
 }
 
 export default XLN;
