@@ -12,6 +12,7 @@ export default class Logger extends React.Component {
   }
 
   static propTypes = {
+    transformer: React.PropTypes.func.isRequired,
   };
 
   DisplayOpenFolderOrFile() {

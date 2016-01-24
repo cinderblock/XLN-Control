@@ -45,6 +45,16 @@ class ChartLayout extends React.Component {
 
 }
 
+function LoggerDataTransformer(data) {
+  return [data.time, data.voltage || 0, data.current || 0, data.power || 0];
+}
+LoggerDataTransformer.Header = LoggerDataTransformer({
+  time: 'Time (ms)',
+  voltage: 'Voltage (V)',
+  current: 'Current (A)',
+  power: 'Power (W)',
+});
+
 class XLN extends React.Component {
 
   constructor(props) {
@@ -286,7 +296,7 @@ class XLN extends React.Component {
           <Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)} block bsSize="large" bsStyle="primary">{this.state.output}</Button>
         </ChartLayout>
         <h3>Logging Control</h3>
-        <Logger ref='logger' />
+        <Logger ref='logger' transformer={LoggerDataTransformer} />
       </div>
     );
   }
