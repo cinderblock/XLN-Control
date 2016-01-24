@@ -46,6 +46,8 @@ export default class Logger extends React.Component {
 
     // Open file for writing
     this.openFile = true; //FS.open(...)
+
+    // Write header
   }
 
   stopLogging() {
