@@ -87,6 +87,7 @@ export default class Logger extends React.Component {
       <Button onClick={this.DisplaySelectFile.bind(this)}>Save to File</Button>
       {folderUI}
       <div>{loggingState}</div>
+      <Button onClick={this.stopLogging.bind(this)}>Stop Logging</Button>
     </div>;
   }
 }
