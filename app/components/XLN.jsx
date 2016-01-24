@@ -34,7 +34,7 @@ class ChartLayout extends React.Component {
 
     return (
       <div style={wrapperStyle}>
-        <div style={chartStyle}><Smoothie ref={this.props.chartCallback} interpolation="step" width={chartWidth} height={chartHeight} /></div>
+        <div style={chartStyle}><Smoothie ref={this.props.chartCallback} minValue={0} interpolation='step' width={chartWidth} height={chartHeight} /></div>
         <div style={controlStyle}>{this.props.children}</div>
         <div style={clear}></div>
       </div>
