@@ -4,7 +4,7 @@ import {tcpXLN} from 'xln';
 import {Button} from 'react-bootstrap';
 import Smoothie from 'react-smoothie';
 import FA from 'react-fontawesome';
-import Logger from './Logger';
+import Logger from './Logger.jsx';
 import ActivitySpinner from './ActivitySpinner.jsx';
 
 class ChartLayout extends React.Component {
