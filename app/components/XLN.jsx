@@ -4,6 +4,7 @@ import {tcpXLN} from 'xln';
 import {Button} from 'react-bootstrap';
 import Smoothie from 'react-smoothie';
 import FA from 'react-fontawesome';
+import Logger from './Logger';
 
 class ChartLayout extends React.Component {
   render() {
@@ -149,6 +150,7 @@ class XLN extends React.Component {
       this.updateStateIncrementMessages({measCurrent: current});
       this.currentTimeSeries.append(time, current);
       this.powerTimeSeries.append(time, power);
+      this.refs.logger.append({time, current, power});
       cb();
     });
   }
@@ -160,6 +162,7 @@ class XLN extends React.Component {
       this.updateStateIncrementMessages({measVoltage: voltage});
       this.voltageTimeSeries.append(time, voltage);
       this.powerTimeSeries.append(time, power);
+      this.refs.logger.append({time, voltage, power});
       cb();
     });
   }
@@ -281,6 +284,8 @@ class XLN extends React.Component {
           <h3>Output Control</h3>
           <Button active={this.state.outputSet} onClick={this.toggleOutput.bind(this)} block bsSize="large" bsStyle="primary">{this.state.output}</Button>
         </ChartLayout>
+        <h3>Logging Control</h3>
+        <Logger ref='logger' />
       </div>
     );
   }
