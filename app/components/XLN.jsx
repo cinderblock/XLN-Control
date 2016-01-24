@@ -145,9 +145,10 @@ class XLN extends React.Component {
   updateMeasuredCurrent(cb) {
     var time = new Date().getTime();
     this.connection.getMeasuredCurrent(current => {
+      var power = current * this.state.measVoltage;
       this.updateStateIncrementMessages({measCurrent: current});
       this.currentTimeSeries.append(time, current);
-      this.powerTimeSeries.append(time, current * this.state.measVoltage);
+      this.powerTimeSeries.append(time, power);
       cb();
     });
   }
@@ -155,9 +156,10 @@ class XLN extends React.Component {
   updateMeasuredVoltage(cb) {
     var time = new Date().getTime();
     this.connection.getMeasuredVoltage(voltage => {
+      var power = voltage * this.state.measCurrent;
       this.updateStateIncrementMessages({measVoltage: voltage});
       this.voltageTimeSeries.append(time, voltage);
-      this.powerTimeSeries.append(time, voltage * this.state.measCurrent);
+      this.powerTimeSeries.append(time, power);
       cb();
     });
   }
