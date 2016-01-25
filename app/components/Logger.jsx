@@ -86,6 +86,7 @@ export default class Logger extends React.Component {
 
     this.csvStream.end();
     this.csvStream = undefined;
+    this.setState({currentFile: false});
   }
 
   append(data) {
