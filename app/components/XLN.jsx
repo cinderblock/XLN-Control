@@ -50,7 +50,7 @@ function LoggerDataTransformer(data) {
     data.time,
     data.voltage || 0,
     data.current || 0,
-    data.power || 0
+    data.power || 0,
   ];
 }
 LoggerDataTransformer.header = LoggerDataTransformer({
