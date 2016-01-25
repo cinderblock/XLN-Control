@@ -64,7 +64,7 @@ export default class Logger extends React.Component {
       if (!file) return;
 
       this.setState({selectedFolder: false});
-    this.logToFile(file);
+      this.logToFile(file);
     });
   }
 
