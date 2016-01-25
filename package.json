@@ -80,6 +80,7 @@
     "config": "^1.19.0",
     "debug": "^2.2.0",
     "electron-debug": "^0.5.1",
+    "fast-csv": "^1.0.0",
     "flux": "^2.1.1",
     "keymirror": "^0.1.1",
     "object-assign": "^4.0.1",

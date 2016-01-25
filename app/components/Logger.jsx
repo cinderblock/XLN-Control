@@ -6,6 +6,8 @@ import ShellOpen from './ShellOpen.jsx';
 const dialog = remote.require('dialog');
 import strftime from 'strftime';
 import path from 'path';
+import csv from 'fast-csv';
+import fs from 'fs';
 
 export default class Logger extends React.Component {
   constructor(props) {
@@ -61,24 +63,32 @@ export default class Logger extends React.Component {
     this.stopLogging();
 
     // Open file for writing
-    this.openFile = true; //FS.open(...)
+    this.csvStream = csv.createWriteStream({headers: true});
+    this.csvStream.pipe(fs.createWriteStream(file));
 
     // Write header
+    this.csvStream.write(this.props.transformer.header);
   }
 
   stopLogging() {
-    if (!this.openFile)
+    if (!this.csvStream)
       return;
 
-    this.openFile.close();
+    this.csvStream.end();
+    this.csvStream = undefined;
   }
 
   append(data) {
     this.refs.loggerActivity.ping();
 
-    if (!this.openFile)
+    if (!this.csvStream)
       return;
 
+    // Format data to array with formatter
+    data = this.props.transformer(data);
+
+    // Write array to csv file
+    this.csvStream.write(data);
   }
 
   render() {
