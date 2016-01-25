@@ -65,23 +65,23 @@ class XLN extends React.Component {
   constructor(props) {
     super(props);
     if (props.host) {
-    this.state = {
-      // Number of messages seen since start of connection
-      messages: 0,
-      connected: false,
-      setVoltage: null,
-      setCurrent: null,
-      measVoltage: null,
-      measCurrent: null,
-      outVoltage: null,
-      outCurrent: null,
-      limitVoltage: null,
-      limitCurrent: null,
-      output: 'N/A',
-      outputSet: false,
-      connectionError: null,
-      connectionState: 'Initializing'
-    }
+      this.state = {
+        // Number of messages seen since start of connection
+        messages: 0,
+        connected: false,
+        setVoltage: null,
+        setCurrent: null,
+        measVoltage: null,
+        measCurrent: null,
+        outVoltage: null,
+        outCurrent: null,
+        limitVoltage: null,
+        limitCurrent: null,
+        output: 'N/A',
+        outputSet: false,
+        connectionError: null,
+        connectionState: 'Initializing'
+      }
     } else {
       // Dev mode
       this.state = {
