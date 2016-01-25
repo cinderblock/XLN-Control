@@ -64,6 +64,7 @@ class XLN extends React.Component {
 
   constructor(props) {
     super(props);
+    if (props.host) {
     this.state = {
       // Number of messages seen since start of connection
       messages: 0,
@@ -81,13 +82,33 @@ class XLN extends React.Component {
       connectionError: null,
       connectionState: 'Initializing'
     }
+    } else {
+      // Dev mode
+      this.state = {
+        // Number of messages seen since start of connection
+        messages: 0,
+        connected: true,
+        setVoltage: 'setV',
+        setCurrent: 'setC',
+        measVoltage: 'measV',
+        measCurrent: 'measC',
+        outVoltage: 'outV',
+        outCurrent: 'outC',
+        limitVoltage: 'limitV',
+        limitCurrent: 'limitC',
+        output: 'N/A',
+        outputSet: false,
+        connectionError: null,
+        connectionState: 'Initializing'
+      }
+    }
     this.connection = null;
     this.updateNumber = 0;
     this.nextUpdate = false;
   }
 
  static propTypes = {
-    host: React.PropTypes.string.isRequired
+    host: React.PropTypes.string,
   };
 
   componentDidMount() {
@@ -265,9 +286,6 @@ class XLN extends React.Component {
          <div>{this.state.connectionError}</div>
         </div>
       );
-    }
-    if (!this.props.host) {
-      return <div>'No host specified'</div>;
     }
 
     return (
