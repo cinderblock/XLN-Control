@@ -146,6 +146,12 @@ class XLN extends React.Component {
   }
 
   reconnect() {
+    // Disconnected mode
+    if (!this.props.host) {
+      this.setState({connectionState: 'Disconnected'});
+      return;
+    }
+
     this.setState({connectionState: 'Connecting'});
 
     this.connection = new tcpXLN({host:this.props.host}, () => {
