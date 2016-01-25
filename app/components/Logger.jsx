@@ -85,7 +85,7 @@ export default class Logger extends React.Component {
     var folderUI = null;
     if (this.state.selectedFolder) {
       folderUI = <div>
-        Selected Folder: <ShellOpen folder={this.state.selectedFolder} />
+        Selected Folder: <ShellOpen target={this.state.selectedFolder} />
         <input ref="filename" type="text" defaultValue="log-%F-%H-%M-%S.csv" />
         <Button onClick={this.NewLogFileInCurrentFolder.bind(this)}>New File</Button>
       </div>;

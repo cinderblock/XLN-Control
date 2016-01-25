@@ -11,10 +11,10 @@ export default class ShellOpen extends React.Component {
 
   render() {
     function openFolder() {
-      if (!this.props.folder) return;
-      shell.openItem(this.props.folder);
+      if (!this.props.target) return;
+      shell.openItem(this.props.target);
     }
 
-    return <div><a onClick={openFolder.bind(this)}>{this.props.folder || 'No folder selected'}</a></div>;
+    return <div><a onClick={openFolder.bind(this)}>{this.props.target || 'No target selected'}</a></div>;
   }
 }
