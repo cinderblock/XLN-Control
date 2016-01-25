@@ -4,6 +4,8 @@ import ActivitySpinner from './ActivitySpinner.jsx';
 import {remote} from 'electron';
 import ShellOpen from './ShellOpen.jsx';
 const dialog = remote.require('dialog');
+import strftime from 'strftime';
+import path from 'path';
 
 export default class Logger extends React.Component {
   constructor(props) {
@@ -34,6 +36,17 @@ export default class Logger extends React.Component {
 
   NewLogFileInCurrentFolder() {
     if (!this.state.selectedFolder) return;
+
+    var filename = '';
+
+    filename += this.state.selectedFolder;
+
+    filename += path.sep;
+
+    filename += strftime(this.refs.filename.value);
+
+
+    this.logToFile(filename);
   }
 
   DisplaySelectFile() {

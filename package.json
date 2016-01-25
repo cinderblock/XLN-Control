@@ -84,6 +84,7 @@
     "object-assign": "^4.0.1",
     "react": "^0.14.6",
     "react-router": "^2.0.0-rc5",
-    "react-smoothie": "0.2.1"
+    "react-smoothie": "0.2.1",
+    "strftime": "^0.9.2"
   }
 }
