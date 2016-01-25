@@ -53,9 +53,14 @@ export default class Logger extends React.Component {
 
   DisplaySelectFile() {
     // Open system dialog
-    var file = false;
+    dialog.showSaveDialog({filters: [
+    ]}, file => {
+      // User canceled
+      if (!file) return;
 
+      this.setState({selectedFolder: false});
     this.logToFile(file);
+    });
   }
 
   logToFile(file) {
