@@ -39,9 +39,7 @@ export default class Logger extends React.Component {
   NewLogFileInCurrentFolder() {
     if (!this.state.selectedFolder) return;
 
-    var filename = '';
-
-    filename += this.state.selectedFolder;
+    var filename = this.state.selectedFolder;
 
     filename += path.sep;
 
