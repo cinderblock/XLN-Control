@@ -54,6 +54,8 @@ export default class Logger extends React.Component {
   DisplaySelectFile() {
     // Open system dialog
     dialog.showSaveDialog({filters: [
+      { name: 'CSV (Comma Separated Values)', extensions: ['csv'] },
+      { name: 'All Files', extensions: ['*'] },
     ]}, file => {
       // User canceled
       if (!file) return;
