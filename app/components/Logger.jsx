@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from 'react-bootstrap';
 import ActivitySpinner from './ActivitySpinner.jsx';
 import {remote} from 'electron';
+import ShellOpen from './ShellOpen.jsx';
 const dialog = remote.require('dialog');
 
 export default class Logger extends React.Component {
@@ -71,7 +72,7 @@ export default class Logger extends React.Component {
     var folderUI = null;
     if (this.state.selectedFolder) {
       folderUI = <div>
-        Selected Folder: {this.state.selectedFolder}
+        Selected Folder: <ShellOpen folder={this.state.selectedFolder} />
         <input ref="filename" type="text" defaultValue="log-%F-%H-%M-%S.csv" />
         <Button onClick={this.NewLogFileInCurrentFolder.bind(this)}>New File</Button>
       </div>;
