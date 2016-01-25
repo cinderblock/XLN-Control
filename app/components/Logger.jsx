@@ -23,8 +23,11 @@ export default class Logger extends React.Component {
       // User canceled
       if (!directory) return;
 
+      // No dir selected
+      if (!directory[0]) return;
+
       // Set folder mode
-      this.setState({selectedFolder: directory});
+      this.setState({selectedFolder: directory[0]});
     });
   }
 
