@@ -39,12 +39,16 @@ export default class Logger extends React.Component {
   NewLogFileInCurrentFolder() {
     if (!this.state.selectedFolder) return;
 
+    // Start with the selected folder
     var filename = this.state.selectedFolder;
 
+    // Add platform specific path separator
     filename += path.sep;
 
+    // Append filename
     filename += strftime(this.refs.filename.value);
 
+    // Force file extension
     filename += '.csv';
 
 
