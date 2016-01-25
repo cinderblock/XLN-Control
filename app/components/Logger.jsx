@@ -33,6 +33,7 @@ export default class Logger extends React.Component {
 
       // Set folder mode
       this.setState({selectedFolder: directory[0]});
+      this.fileNumber = 0;
     });
   }
 
@@ -46,12 +47,14 @@ export default class Logger extends React.Component {
     filename += path.sep;
 
     // Append filename
-    filename += strftime(this.refs.filename.value);
+    filename += strftime(this.refs.filename.value.trim().replace(/\*/, this.fileNumber));
 
     // Force file extension
     filename += '.csv';
 
     this.logToFile(filename);
+
+    this.fileNumber++;
   }
 
   DisplaySelectFile() {
