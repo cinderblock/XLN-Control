@@ -46,11 +46,12 @@ class ChartLayout extends React.Component {
 }
 
 function LoggerDataTransformer(data) {
+  const empty = '';
   return [
-    data.time,
-    data.voltage || 0,
-    data.current || 0,
-    data.power || 0,
+    data.time || empty,
+    data.voltage || empty,
+    data.current || empty,
+    data.power || empty,
   ];
 }
 LoggerDataTransformer.header = LoggerDataTransformer({
