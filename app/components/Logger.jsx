@@ -51,7 +51,6 @@ export default class Logger extends React.Component {
     // Force file extension
     filename += '.csv';
 
-
     this.logToFile(filename);
   }
 
