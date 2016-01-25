@@ -31,6 +31,10 @@ export default class Logger extends React.Component {
     });
   }
 
+  NewLogFileInCurrentFolder() {
+    if (!this.state.selectedFolder) return;
+  }
+
   DisplaySelectFile() {
     // Open system dialog
     var file = false;
@@ -69,7 +73,7 @@ export default class Logger extends React.Component {
       folderUI = <div>
         Selected Folder: {this.state.selectedFolder}
         <input type="text" defaultValue="prefix" />-<input type="text" defaultValue="postfix" />
-        <Button>New File</Button>
+        <Button onClick={this.NewLogFileInCurrentFolder.bind(this)}>New File</Button>
       </div>;
     }
 
