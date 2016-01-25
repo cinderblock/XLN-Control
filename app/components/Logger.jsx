@@ -1,6 +1,8 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 import ActivitySpinner from './ActivitySpinner.jsx';
+import {remote} from 'electron';
+const dialog = remote.require('dialog');
 
 export default class Logger extends React.Component {
   constructor(props) {
@@ -15,22 +17,15 @@ export default class Logger extends React.Component {
     transformer: React.PropTypes.func.isRequired,
   };
 
-  DisplayOpenFolderOrFile() {
+  DisplayOpenFolder() {
     // Open system dialog
+    dialog.showOpenDialog({properties: ['openDirectory']}, directory => {
+      // User canceled
+      if (!directory) return;
 
-    // Check if folder or file selected
-    var file = false;
-    var selectedFolder = false;
-
-    // If file
-    if (file) {
-      this.setState({selectedFolder: flase});
-      this.logToFile(file);
-      return;
-    }
-
-    // Set folder mode
-    this.setState({selectedFolder});
+      // Set folder mode
+      this.setState({selectedFolder: directory});
+    });
   }
 
   DisplaySelectFile() {
@@ -83,7 +78,7 @@ export default class Logger extends React.Component {
     }
 
     return <div>
-      <Button onClick={this.DisplayOpenFolderOrFile.bind(this)}>Open File/Folder</Button>
+      <Button onClick={this.DisplayOpenFolder.bind(this)}>Open Folder</Button>
       <Button onClick={this.DisplaySelectFile.bind(this)}>Save to File</Button>
       {folderUI}
       <div>{loggingState}</div>
