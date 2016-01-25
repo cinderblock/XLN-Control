@@ -69,8 +69,8 @@ export default class Logger extends React.Component {
   }
 
   logToFile(file) {
-    this.setState({currentFile: file});
     this.stopLogging();
+    this.setState({currentFile: file});
 
     // Open file for writing
     this.csvStream = csv.createWriteStream({headers: true});
