@@ -117,7 +117,12 @@ export default class Logger extends React.Component {
 
     var loggingState = null;
     if (this.state.currentFile) {
-      loggingState = <div><ActivitySpinner ref='loggerActivity'/>Logging to file: <ShellOpen target={this.state.currentFile} /></div>;
+      loggingState =
+        <div>
+          <ActivitySpinner ref='loggerActivity'/>
+          Logging to file:
+          <ShellOpen target={this.state.currentFile} />
+        </div>;
     } else {
       loggingState = 'Not logging';
     }
