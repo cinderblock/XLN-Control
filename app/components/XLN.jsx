@@ -306,6 +306,7 @@ class XLN extends React.Component {
           <h3>Voltage</h3>
           <div>{this.state.setVoltage} Volts</div>
           <div>{this.state.measVoltage} Volts</div>
+          <h4>Set new voltage limit</h4>
           <form onSubmit={e => {e.preventDefault(); this.setSourceVoltage(e.target[0].value);}}>
             <input defaultValue={this.state.outVoltage} />
           </form>
@@ -314,6 +315,7 @@ class XLN extends React.Component {
           <h3>Current</h3>
           <div>{this.state.setCurrent} Amps</div>
           <div>{this.state.measCurrent} Amps</div>
+          <h4>Set new current limit</h4>
           <form onSubmit={e => {e.preventDefault(); this.setSourceCurrent(e.target[0].value);}}>
             <input defaultValue={this.state.outCurrent} />
           </form>
