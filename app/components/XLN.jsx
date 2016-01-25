@@ -53,7 +53,7 @@ function LoggerDataTransformer(data) {
     data.power || 0
   ];
 }
-LoggerDataTransformer.Header = LoggerDataTransformer({
+LoggerDataTransformer.header = LoggerDataTransformer({
   time: 'Time (ms)',
   voltage: 'Voltage (V)',
   current: 'Current (A)',
