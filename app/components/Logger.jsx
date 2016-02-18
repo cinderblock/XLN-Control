@@ -93,7 +93,8 @@ export default class Logger extends React.Component {
   }
 
   append(data) {
-    this.refs.loggerActivity.ping();
+    if (this.refs.loggerActivity)
+      this.refs.loggerActivity.ping();
 
     if (!this.csvStream)
       return;
