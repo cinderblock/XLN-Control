@@ -56,7 +56,7 @@
     "file-loader": "^0.8.5",
     "font-awesome": "^4.5.0",
     "history": "^2.0.0-rc2",
-    "minimist": "^1.2.2",
+    "minimist": "^1.2.3",
     "mocha": "^2.3.4",
     "node-libs-browser": "^1.0.0",
     "proxyquire": "^1.7.3",
