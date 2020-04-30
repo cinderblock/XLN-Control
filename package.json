@@ -81,7 +81,7 @@
     "electron-debug": "^0.5.1",
     "fast-csv": "^1.0.0",
     "flux": "^2.1.1",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "keymirror": "^0.1.1",
     "object-assign": "^4.0.1",
     "react": "^0.14.6",
