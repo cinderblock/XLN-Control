@@ -5717,8 +5717,8 @@ slash@^1.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
 smoothie@^1.27.0:
-  version "1.35.0"
-  resolved "https://registry.yarnpkg.com/smoothie/-/smoothie-1.35.0.tgz#91dff7f22ec770044c7e6a1323a694a4fd96d001"
+  version "1.36.1"
+  resolved "https://registry.yarnpkg.com/smoothie/-/smoothie-1.36.1.tgz#969958f339913b50e62a1dee206c31630530871b"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
